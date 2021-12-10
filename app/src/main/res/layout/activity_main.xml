@@ -7,17 +7,6 @@
         android:layout_height="match_parent"
         android:paddingTop="10dp">
 
-    <com.mancj.materialsearchbar.MaterialSearchBar
-        style="@style/MaterialSearchBarLight"
-        app:mt_speechMode="true"
-        app:mt_hint="@string/search_hint"
-        app:mt_placeholder="@string/search_hint"
-        app:mt_maxSuggestionsCount="10"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/searchBar"
-        app:layout_constraintTop_toTopOf="parent"/>
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/nav_view"
             android:layout_width="0dp"

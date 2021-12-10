@@ -5,13 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import io.github.leonidius20.vaggregator.R
+import com.mancj.materialsearchbar.MaterialSearchBar
 import io.github.leonidius20.vaggregator.databinding.FragmentDashboardBinding
 
-class DashboardFragment : Fragment() {
+class DashboardFragment : Fragment(), MaterialSearchBar.OnSearchActionListener {
 
     private lateinit var dashboardViewModel: DashboardViewModel
     private var _binding: FragmentDashboardBinding? = null
@@ -24,7 +25,7 @@ class DashboardFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         dashboardViewModel =
             ViewModelProvider(this).get(DashboardViewModel::class.java)
 
@@ -35,6 +36,9 @@ class DashboardFragment : Fragment() {
         dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
+
+        binding.moviesSearchBar.setOnSearchActionListener(this)
+
         return root
     }
 
@@ -42,4 +46,17 @@ class DashboardFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+    override fun onSearchStateChanged(enabled: Boolean) {
+
+    }
+
+    override fun onSearchConfirmed(text: CharSequence?) {
+        Toast.makeText( context, text, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onButtonClicked(buttonCode: Int) {
+
+    }
+
 }

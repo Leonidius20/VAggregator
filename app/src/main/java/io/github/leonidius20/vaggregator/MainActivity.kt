@@ -1,15 +1,12 @@
 package io.github.leonidius20.vaggregator
 
-import android.app.SearchManager
-import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.github.leonidius20.vaggregator.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -35,8 +32,6 @@ class MainActivity : AppCompatActivity() {
 
         NavigationUI.setupWithNavController(navView, navController)
         navView.setupWithNavController(navController)
-
-
 
     }
 }

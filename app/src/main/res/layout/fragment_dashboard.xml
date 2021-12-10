@@ -7,6 +7,18 @@
         android:layout_height="match_parent"
         tools:context=".ui.dashboard.DashboardFragment">
 
+    <com.mancj.materialsearchbar.MaterialSearchBar
+        style="@style/MaterialSearchBarLight"
+        app:mt_speechMode="false"
+        app:mt_hint="@string/search_hint"
+        app:mt_maxSuggestionsCount="10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/movies_search_bar"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@android:drawable/dialog_holo_light_frame"
+        />
+
     <TextView
             android:id="@+id/text_dashboard"
             android:layout_width="match_parent"
