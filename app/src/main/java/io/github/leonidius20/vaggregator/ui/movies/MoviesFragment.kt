@@ -4,13 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.mancj.materialsearchbar.MaterialSearchBar
+import io.github.leonidius20.vaggregator.data.providers.ThePirateBayMovie
 import io.github.leonidius20.vaggregator.databinding.FragmentMoviesBinding
+import io.github.leonidius20.vaggregator.ui.movies.search_results_list.MoviesAdapter
 
 class MoviesFragment : Fragment(), MaterialSearchBar.OnSearchActionListener {
 
@@ -29,14 +29,13 @@ class MoviesFragment : Fragment(), MaterialSearchBar.OnSearchActionListener {
         _binding = FragmentMoviesBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
-        moviesViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+        binding.searchResultsRecyclerView.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = MoviesAdapter(arrayOf(ThePirateBayMovie("", "Test Movie", "", 0, 0, 0, 0, "", 0, "", 200, "")))
+        }
 
         moviesViewModel.movies.observe(viewLifecycleOwner) {
-            // TODO: display the movies
-            Toast.makeText(context, "Loaded ${it.size} movies", Toast.LENGTH_SHORT).show()
+            binding.searchResultsRecyclerView.adapter = MoviesAdapter(it.toTypedArray())
         }
 
         binding.moviesSearchBar.setOnSearchActionListener(this)

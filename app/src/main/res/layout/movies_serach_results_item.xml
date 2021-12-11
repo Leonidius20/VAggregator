@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="?attr/selectableItemBackground"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="100dp">
+
+    <ImageView
+        android:id="@+id/movies_search_result_item_thumbnail"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintWidth_percent="0.3"
+        app:layout_constraintHeight_min="20dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/movies_search_result_item_title"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="16dp"
+        android:maxLines="1"
+        android:textAppearance="?attr/textAppearanceSubtitle1"
+        app:layout_constraintHeight_percent="0.5"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/movies_search_result_item_description"
+        app:layout_constraintStart_toEndOf="@id/movies_search_result_item_thumbnail"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/movies_search_result_item_description"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:paddingEnd="16dp"
+        android:maxLines="2"
+        android:textAppearance="?attr/textAppearanceBody2"
+        app:layout_constraintHeight_percent="0.5"
+        app:layout_constraintTop_toBottomOf="@id/movies_search_result_item_title"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/movies_search_result_item_thumbnail"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
