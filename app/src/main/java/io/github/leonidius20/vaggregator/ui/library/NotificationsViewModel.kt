@@ -1,4 +1,4 @@
-package io.github.leonidius20.vaggregator.ui.notifications
+package io.github.leonidius20.vaggregator.ui.library
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

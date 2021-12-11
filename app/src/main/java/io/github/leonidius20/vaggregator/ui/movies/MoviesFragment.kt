@@ -1,4 +1,4 @@
-package io.github.leonidius20.vaggregator.ui.dashboard
+package io.github.leonidius20.vaggregator.ui.movies
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,15 +7,15 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.mancj.materialsearchbar.MaterialSearchBar
-import io.github.leonidius20.vaggregator.databinding.FragmentDashboardBinding
+import io.github.leonidius20.vaggregator.databinding.FragmentMoviesBinding
 
-class DashboardFragment : Fragment(), MaterialSearchBar.OnSearchActionListener {
+class MoviesFragment : Fragment(), MaterialSearchBar.OnSearchActionListener {
 
-    private lateinit var dashboardViewModel: DashboardViewModel
-    private var _binding: FragmentDashboardBinding? = null
+    private val moviesViewModel: MoviesViewModel by viewModels()
+    private var _binding: FragmentMoviesBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -26,16 +26,18 @@ class DashboardFragment : Fragment(), MaterialSearchBar.OnSearchActionListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        dashboardViewModel =
-            ViewModelProvider(this).get(DashboardViewModel::class.java)
-
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+        _binding = FragmentMoviesBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
+        moviesViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
+
+        moviesViewModel.movies.observe(viewLifecycleOwner) {
+            // TODO: display the movies
+            Toast.makeText(context, "Loaded ${it.size} movies", Toast.LENGTH_SHORT).show()
+        }
 
         binding.moviesSearchBar.setOnSearchActionListener(this)
 
@@ -52,7 +54,7 @@ class DashboardFragment : Fragment(), MaterialSearchBar.OnSearchActionListener {
     }
 
     override fun onSearchConfirmed(text: CharSequence?) {
-        Toast.makeText( context, text, Toast.LENGTH_SHORT).show()
+        moviesViewModel.loadMovies(text.toString())
     }
 
     override fun onButtonClicked(buttonCode: Int) {

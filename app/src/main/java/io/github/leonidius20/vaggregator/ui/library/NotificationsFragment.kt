@@ -1,4 +1,4 @@
-package io.github.leonidius20.vaggregator.ui.notifications
+package io.github.leonidius20.vaggregator.ui.library
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,13 +8,12 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import io.github.leonidius20.vaggregator.R
-import io.github.leonidius20.vaggregator.databinding.FragmentNotificationsBinding
+import io.github.leonidius20.vaggregator.databinding.FragmentLibraryBinding
 
 class NotificationsFragment : Fragment() {
 
     private lateinit var notificationsViewModel: NotificationsViewModel
-    private var _binding: FragmentNotificationsBinding? = null
+    private var _binding: FragmentLibraryBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -28,7 +27,7 @@ class NotificationsFragment : Fragment() {
         notificationsViewModel =
             ViewModelProvider(this).get(NotificationsViewModel::class.java)
 
-        _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
+        _binding = FragmentLibraryBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textNotifications

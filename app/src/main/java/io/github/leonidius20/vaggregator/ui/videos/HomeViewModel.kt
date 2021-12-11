@@ -1,4 +1,4 @@
-package io.github.leonidius20.vaggregator.ui.home
+package io.github.leonidius20.vaggregator.ui.videos
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
