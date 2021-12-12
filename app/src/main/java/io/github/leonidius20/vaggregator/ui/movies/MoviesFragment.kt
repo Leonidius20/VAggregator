@@ -5,16 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mancj.materialsearchbar.MaterialSearchBar
+import io.github.leonidius20.vaggregator.R
 import io.github.leonidius20.vaggregator.data.providers.ThePirateBayMovie
 import io.github.leonidius20.vaggregator.databinding.FragmentMoviesBinding
 import io.github.leonidius20.vaggregator.ui.movies.search_results_list.MoviesAdapter
 
 class MoviesFragment : Fragment(), MaterialSearchBar.OnSearchActionListener {
 
-    private val moviesViewModel: MoviesViewModel by viewModels()
+    private val moviesViewModel: MoviesViewModel by navGraphViewModels(R.id.mobile_navigation)
     private var _binding: FragmentMoviesBinding? = null
 
     // This property is only valid between onCreateView and
