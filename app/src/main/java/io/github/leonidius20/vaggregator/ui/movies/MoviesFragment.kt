@@ -5,17 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mancj.materialsearchbar.MaterialSearchBar
 import io.github.leonidius20.vaggregator.R
 import io.github.leonidius20.vaggregator.databinding.FragmentMoviesBinding
+import io.github.leonidius20.vaggregator.ui.movie_details.MovieDetailsViewModel
 import io.github.leonidius20.vaggregator.ui.movies.search_results_list.MoviesAdapter
 
 class MoviesFragment : Fragment(), MaterialSearchBar.OnSearchActionListener {
 
     private val moviesViewModel: MoviesViewModel by navGraphViewModels(R.id.mobile_navigation)
+
+    private val selectedMovieViewModel: MovieDetailsViewModel by activityViewModels()
+
     private var _binding: FragmentMoviesBinding? = null
 
     // This property is only valid between onCreateView and
@@ -37,7 +42,8 @@ class MoviesFragment : Fragment(), MaterialSearchBar.OnSearchActionListener {
         moviesViewModel.movies.observe(viewLifecycleOwner) {
             binding.searchResultsRecyclerView.adapter =
                 MoviesAdapter(it.toTypedArray()) { selectedMovie ->
-                    val action = MoviesFragmentDirections.actionMoviesToMovieDetails(selectedMovie)
+                    selectedMovieViewModel.select(selectedMovie)
+                    val action = MoviesFragmentDirections.actionMoviesToMovieDetails()
                     findNavController().navigate(action)
                 }
         }

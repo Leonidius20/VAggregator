@@ -31,8 +31,5 @@
         android:name="io.github.leonidius20.vaggregator.ui.movie_details.MovieDetailsFragment"
         android:label="MovieDetailsFragment"
         tools:layout="@layout/fragment_movie_details">
-        <argument
-            android:name="movie"
-            app:argType="io.github.leonidius20.vaggregator.data.providers.ThePirateBayMovie" />
     </fragment>
 </navigation>

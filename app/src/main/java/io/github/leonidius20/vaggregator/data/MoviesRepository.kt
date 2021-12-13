@@ -1,16 +1,22 @@
 package io.github.leonidius20.vaggregator.data
 
-import io.github.leonidius20.vaggregator.data.providers.ThePirateBayMovie
-import io.github.leonidius20.vaggregator.data.providers.ThePirateBayRetrofitClient
-import io.github.leonidius20.vaggregator.data.providers.ThePirateBayService
+import io.github.leonidius20.vaggregator.data.providers.toloka.TolokaRetrofitClient
+import io.github.leonidius20.vaggregator.data.providers.tpb.ThePirateBayRetrofitClient
 
 class MoviesRepository {
 
-    private val tpbProvider: ThePirateBayService = ThePirateBayRetrofitClient.instance.api
+    private val tpbProvider = ThePirateBayRetrofitClient.api
+    private val tolokaProvider = TolokaRetrofitClient.api
 
-    // TODO: return list of generic movies not TPB ones
-    suspend fun findMoves(query: String): List<ThePirateBayMovie> {
-        return tpbProvider.findMovies(query)
+    suspend fun findMoves(query: String): List<Movie> {
+        val movies = mutableListOf<Movie>()
+        movies.addAll(tpbProvider.findMovies(query).map {
+            Movie(it.name, it.sizeString, it.seeders, it.leechers, it.link, it.provider)
+        })
+        movies.addAll(tolokaProvider.findMovies(query).map {
+            Movie(it.name, it.sizeString, it.seeders, it.leechers, it.link, it.provider)
+        })
+        return movies
     }
 
 }
