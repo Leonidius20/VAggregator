@@ -29,7 +29,9 @@ enum class VideoCategory(
     HOW_TO_AND_LIFESTYLE("How-to, style & lifestyle", 26, "lifestyle", null),
     ANIMATION("Animation", 31, null, "animation"),
     DOCUMENTARY("Documentary", 35, null, "documentary"),
-    TRAILERS("Movie trailers", 44, null, null)
+    TRAILERS("Movie trailers", 44, null, null);
+
+    override fun toString() = titleString
 
 
 

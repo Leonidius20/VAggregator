@@ -8,23 +8,34 @@ class VideosRepository {
     private val youtubeProvider = YoutubeService.instance
     private val dailymotionProvider = DailymotionService.instance
 
-    suspend fun findVideos(q: String): List<Video> {
+    suspend fun findVideos(q: String, category: VideoCategory): List<Video> {
         val videos = mutableListOf<Video>()
-        // TODO: categories
-        videos.addAll(youtubeProvider.findVideos(q, 10).items.map {
-            val link = "https://www.youtube.com/watch?v=${it.id.videoId}"
-            with(it.snippet) {
-                Video(title, publishedAt, description, channelTitle, "YouTube",
-                    link, thumbnails.default.url)
-            }
-        })
 
-        val dailymotionVids = dailymotionProvider.findVideos(q, "animals").list.map {
-            Video(it.name,
-                // TODO: fix date
-                it.date.toString(), it.description, it.uploadedBy, "Dailymotion", it.url, it.thumbnailUrl)
+        if (category.youtubeId != null) {
+            val youtubeVideos = youtubeProvider.findVideos(q, category.youtubeId).items
+                .map {
+                    val link = "https://www.youtube.com/watch?v=${it.id.videoId}"
+                    with(it.snippet) {
+                        Video(title, publishedAt, description, channelTitle, "YouTube",
+                            link, thumbnails.default.url)
+                }
+            }
+
+            videos.addAll(youtubeVideos)
         }
-        videos.addAll(dailymotionVids)
+
+        if (category.dailymotionCategory != null) {
+            val dailymotionVids = dailymotionProvider.findVideos(q, category.dailymotionCategory).list.map {
+                Video(it.name,
+                    // TODO: fix date
+                    it.date.toString(), it.description, it.uploadedBy, "Dailymotion", it.url, it.thumbnailUrl)
+            }
+            videos.addAll(dailymotionVids)
+        }
+
+        if (category.vimeoCategory != null) {
+            // TODO
+        }
 
         return videos
     }

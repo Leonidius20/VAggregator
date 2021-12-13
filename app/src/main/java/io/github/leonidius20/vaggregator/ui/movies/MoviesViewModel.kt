@@ -18,7 +18,6 @@ class MoviesViewModel : ViewModel() {
     val movies = MutableLiveData<List<Movie>>()
 
 
-
     fun loadMovies(q: String) {
         viewModelScope.launch {
             movies.value = repository.findMoves(q)

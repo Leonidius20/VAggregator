@@ -1,5 +1,6 @@
 package io.github.leonidius20.vaggregator.ui.movies.search_results_list
 
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,7 +27,7 @@ class SearchResultsAdapter(private val movies: Array<PieceOfContent>, private va
         val movie = movies[position]
         holder.titleTextView.text = movie.name
 
-        holder.descriptionTextView.text = movie.description
+        holder.descriptionTextView.text = Html.fromHtml(movie.description)
         holder.itemView.setOnClickListener { onClick(movie) }
     }
 

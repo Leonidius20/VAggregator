@@ -3,6 +3,7 @@ package io.github.leonidius20.vaggregator.ui.movie_details
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,7 +26,7 @@ class MovieDetailsFragment: Fragment() {
         viewModel.selectedMovie.observe(viewLifecycleOwner) { movie ->
             with(binding) {
                 movieDetailsTitle.text = movie.name
-                movieDetailsSize.text = movie.description
+                movieDetailsSize.text = Html.fromHtml(movie.description)
                 movieDetailsDate.text = movie.provider
 
                 openButton.setOnClickListener {
