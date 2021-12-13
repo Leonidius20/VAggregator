@@ -11,6 +11,7 @@ interface YoutubeService {
         val BASE_URL = "https://www.googleapis.com/youtube/v3/"
         val API_KEY = "AIzaSyCsEVQztb23MzF4ekBYB9PUUVThTICjW-U"
 
+        // TODO: Hilt dependency injection?
         val instance: YoutubeService by lazy {
             val retrofit = Retrofit.Builder()
                 .baseUrl(BASE_URL)
