@@ -1,8 +1,11 @@
 package io.github.leonidius20.vaggregator.data.providers
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 // TODO: extend some BaseMovie
+@Parcelize
 data class ThePirateBayMovie(
 
     val id: String,
@@ -31,4 +34,8 @@ data class ThePirateBayMovie(
 
     val imdb: String,
 
-)
+) : Parcelable {
+
+    public val sizeString get() = "%.2f MB".format(size / 1048576F)
+
+}

@@ -15,11 +15,24 @@
             android:id="@+id/navigation_movies"
             android:name="io.github.leonidius20.vaggregator.ui.movies.MoviesFragment"
 
-            tools:layout="@layout/fragment_movies"/>
+            tools:layout="@layout/fragment_movies">
+        <action
+            android:id="@+id/action_movies_to_movie_details"
+            app:destination="@id/navigation_movie_details" />
+    </fragment>
 
     <fragment
             android:id="@+id/navigation_library"
             android:name="io.github.leonidius20.vaggregator.ui.library.NotificationsFragment"
 
             tools:layout="@layout/fragment_library"/>
+    <fragment
+        android:id="@+id/navigation_movie_details"
+        android:name="io.github.leonidius20.vaggregator.ui.movie_details.MovieDetailsFragment"
+        android:label="MovieDetailsFragment"
+        tools:layout="@layout/fragment_movie_details">
+        <argument
+            android:name="movie"
+            app:argType="io.github.leonidius20.vaggregator.data.providers.ThePirateBayMovie" />
+    </fragment>
 </navigation>

@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import io.github.leonidius20.vaggregator.R
 import io.github.leonidius20.vaggregator.data.providers.ThePirateBayMovie
 
-class MoviesAdapter(private val movies: Array<ThePirateBayMovie>): RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
+class MoviesAdapter(private val movies: Array<ThePirateBayMovie>, private val onClick: (ThePirateBayMovie) -> Unit): RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val imageView = itemView.findViewById<ImageView>(R.id.movies_search_result_item_thumbnail)
@@ -30,6 +30,7 @@ class MoviesAdapter(private val movies: Array<ThePirateBayMovie>): RecyclerView.
         // TODO: better conversion to support GB, TB and so forth
         val sizeMegabytes = movie.size / 1048576F
         holder.descriptionTextView.text = "%.2f MB".format(sizeMegabytes)
+        holder.itemView.setOnClickListener { onClick(movie) }
     }
 
     override fun getItemCount() = movies.size

@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mancj.materialsearchbar.MaterialSearchBar
 import io.github.leonidius20.vaggregator.R
-import io.github.leonidius20.vaggregator.data.providers.ThePirateBayMovie
 import io.github.leonidius20.vaggregator.databinding.FragmentMoviesBinding
 import io.github.leonidius20.vaggregator.ui.movies.search_results_list.MoviesAdapter
 
@@ -32,11 +32,14 @@ class MoviesFragment : Fragment(), MaterialSearchBar.OnSearchActionListener {
 
         binding.searchResultsRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = MoviesAdapter(arrayOf(ThePirateBayMovie("", "Test Movie", "", 0, 0, 0, 0, "", 0, "", 200, "")))
         }
 
         moviesViewModel.movies.observe(viewLifecycleOwner) {
-            binding.searchResultsRecyclerView.adapter = MoviesAdapter(it.toTypedArray())
+            binding.searchResultsRecyclerView.adapter =
+                MoviesAdapter(it.toTypedArray()) { selectedMovie ->
+                    val action = MoviesFragmentDirections.actionMoviesToMovieDetails(selectedMovie)
+                    findNavController().navigate(action)
+                }
         }
 
         binding.moviesSearchBar.setOnSearchActionListener(this)
