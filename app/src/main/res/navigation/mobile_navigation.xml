@@ -9,7 +9,11 @@
             android:id="@+id/navigation_videos"
             android:name="io.github.leonidius20.vaggregator.ui.videos.VideosFragment"
 
-            tools:layout="@layout/fragment_videos"/>
+            tools:layout="@layout/fragment_videos">
+        <action
+            android:id="@+id/action_videos_list_to_details"
+            app:destination="@id/navigation_movie_details" />
+    </fragment>
 
     <fragment
             android:id="@+id/navigation_movies"

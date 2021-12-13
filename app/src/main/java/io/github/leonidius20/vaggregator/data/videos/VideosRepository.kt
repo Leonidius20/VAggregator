@@ -10,8 +10,10 @@ class VideosRepository {
         val videos = mutableListOf<Video>()
         // TODO: categories
         videos.addAll(youtubeProvider.findVideos(q, 10).items.map {
+            val link = "https://www.youtube.com/watch?v=${it.id.videoId}"
             with(it.snippet) {
-                Video(title, publishedAt, description, channelTitle, "YouTube", "https://google.com", thumbnails.default.url)
+                Video(title, publishedAt, description, channelTitle, "YouTube",
+                    link, thumbnails.default.url)
             }
         })
 

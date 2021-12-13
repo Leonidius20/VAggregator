@@ -8,8 +8,13 @@ data class YoutubeSearchResponse(
 
 data class YoutubeSearchResultItem(
 
-    val snippet: YoutubeResultSnippet
+    val snippet: YoutubeResultSnippet,
+    val id: YoutubeId,
 
+)
+
+data class YoutubeId(
+    val videoId: String
 )
 
 data class YoutubeResultSnippet (
