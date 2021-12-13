@@ -1,4 +1,4 @@
-package io.github.leonidius20.vaggregator.data.videos.providers
+package io.github.leonidius20.vaggregator.data.videos.providers.youtube
 
 data class YoutubeSearchResponse(
 
@@ -11,7 +11,7 @@ data class YoutubeSearchResultItem(
     val snippet: YoutubeResultSnippet,
     val id: YoutubeId,
 
-)
+    )
 
 data class YoutubeId(
     val videoId: String
@@ -25,13 +25,13 @@ data class YoutubeResultSnippet (
     val channelTitle: String,
     val thumbnails: YoutubeThumbnails,
 
-)
+    )
 
 data class YoutubeThumbnails(
 
     val default: YoutubeThumbnail,
 
-)
+    )
 
 data class YoutubeThumbnail(
     val url: String,

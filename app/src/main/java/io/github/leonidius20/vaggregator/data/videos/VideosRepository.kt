@@ -1,6 +1,6 @@
 package io.github.leonidius20.vaggregator.data.videos
 
-import io.github.leonidius20.vaggregator.data.videos.providers.YoutubeService
+import io.github.leonidius20.vaggregator.data.videos.providers.youtube.YoutubeService
 
 class VideosRepository {
 

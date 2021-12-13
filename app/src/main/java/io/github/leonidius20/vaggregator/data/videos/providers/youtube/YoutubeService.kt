@@ -1,4 +1,4 @@
-package io.github.leonidius20.vaggregator.data.videos.providers
+package io.github.leonidius20.vaggregator.data.videos.providers.youtube
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -27,7 +27,8 @@ interface YoutubeService {
         @Query("videoCategoryId") videoCategoryId: Int,
         @Query("part") part: String = "snippet",
         @Query("type") type: String = "video",
-        @Query("key") key: String = API_KEY): YoutubeSearchResponse
+        @Query("key") key: String = API_KEY
+    ): YoutubeSearchResponse
 
     // ttps://www.googleapis.com/youtube/v3/search?part=snippet&q=bieber&type=video&videoCategoryId=10&key={YOUR_API_KEY}
 }
