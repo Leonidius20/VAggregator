@@ -1,4 +1,4 @@
-package io.github.leonidius20.vaggregator.data.providers.tpb
+package io.github.leonidius20.vaggregator.data.movies.providers.tpb
 
 import retrofit2.http.GET
 import retrofit2.http.Query

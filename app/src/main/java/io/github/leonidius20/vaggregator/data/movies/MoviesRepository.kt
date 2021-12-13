@@ -1,7 +1,7 @@
-package io.github.leonidius20.vaggregator.data
+package io.github.leonidius20.vaggregator.data.movies
 
-import io.github.leonidius20.vaggregator.data.providers.toloka.TolokaRetrofitClient
-import io.github.leonidius20.vaggregator.data.providers.tpb.ThePirateBayRetrofitClient
+import io.github.leonidius20.vaggregator.data.movies.providers.toloka.TolokaRetrofitClient
+import io.github.leonidius20.vaggregator.data.movies.providers.tpb.ThePirateBayRetrofitClient
 
 class MoviesRepository {
 

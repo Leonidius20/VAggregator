@@ -25,7 +25,7 @@ class MovieDetailsFragment: Fragment() {
         viewModel.selectedMovie.observe(viewLifecycleOwner) { movie ->
             with(binding) {
                 movieDetailsTitle.text = movie.name
-                movieDetailsSize.text = movie.sizeString
+                movieDetailsSize.text = movie.description
                 movieDetailsDate.text = movie.provider
 
                 openButton.setOnClickListener {

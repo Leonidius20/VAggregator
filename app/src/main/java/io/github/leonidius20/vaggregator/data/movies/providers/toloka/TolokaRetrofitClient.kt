@@ -1,4 +1,4 @@
-package io.github.leonidius20.vaggregator.data.providers.toloka
+package io.github.leonidius20.vaggregator.data.movies.providers.toloka
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

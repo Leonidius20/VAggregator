@@ -3,16 +3,15 @@ package io.github.leonidius20.vaggregator.ui.movies.search_results_list
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import io.github.leonidius20.vaggregator.R
-import io.github.leonidius20.vaggregator.data.Movie
+import io.github.leonidius20.vaggregator.data.PieceOfContent
 
-class MoviesAdapter(private val movies: Array<Movie>, private val onClick: (Movie) -> Unit): RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
+class SearchResultsAdapter(private val movies: Array<PieceOfContent>, private val onClick: (PieceOfContent) -> Unit): RecyclerView.Adapter<SearchResultsAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        val imageView = itemView.findViewById<ImageView>(R.id.movies_search_result_item_thumbnail)
+        // val imageView = itemView.findViewById<ImageView>(R.id.movies_search_result_item_thumbnail)
         val titleTextView = itemView.findViewById<TextView>(R.id.movies_search_result_item_title)
         val descriptionTextView = itemView.findViewById<TextView>(R.id.movies_search_result_item_description)
     }
@@ -27,7 +26,7 @@ class MoviesAdapter(private val movies: Array<Movie>, private val onClick: (Movi
         val movie = movies[position]
         holder.titleTextView.text = movie.name
 
-        holder.descriptionTextView.text = movie.sizeString
+        holder.descriptionTextView.text = movie.description
         holder.itemView.setOnClickListener { onClick(movie) }
     }
 

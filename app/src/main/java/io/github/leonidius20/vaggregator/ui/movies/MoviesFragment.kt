@@ -13,7 +13,7 @@ import com.mancj.materialsearchbar.MaterialSearchBar
 import io.github.leonidius20.vaggregator.R
 import io.github.leonidius20.vaggregator.databinding.FragmentMoviesBinding
 import io.github.leonidius20.vaggregator.ui.movie_details.MovieDetailsViewModel
-import io.github.leonidius20.vaggregator.ui.movies.search_results_list.MoviesAdapter
+import io.github.leonidius20.vaggregator.ui.movies.search_results_list.SearchResultsAdapter
 
 class MoviesFragment : Fragment(), MaterialSearchBar.OnSearchActionListener {
 
@@ -41,7 +41,7 @@ class MoviesFragment : Fragment(), MaterialSearchBar.OnSearchActionListener {
 
         moviesViewModel.movies.observe(viewLifecycleOwner) {
             binding.searchResultsRecyclerView.adapter =
-                MoviesAdapter(it.toTypedArray()) { selectedMovie ->
+                SearchResultsAdapter(it.toTypedArray()) { selectedMovie ->
                     selectedMovieViewModel.select(selectedMovie)
                     val action = MoviesFragmentDirections.actionMoviesToMovieDetails()
                     findNavController().navigate(action)

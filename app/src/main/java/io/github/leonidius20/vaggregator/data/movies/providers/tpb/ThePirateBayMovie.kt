@@ -1,4 +1,4 @@
-package io.github.leonidius20.vaggregator.data.providers.tpb
+package io.github.leonidius20.vaggregator.data.movies.providers.tpb
 
 import com.google.gson.annotations.SerializedName
 import java.net.URLEncoder

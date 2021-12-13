@@ -1,4 +1,4 @@
-package io.github.leonidius20.vaggregator.data.providers.toloka
+package io.github.leonidius20.vaggregator.data.movies.providers.toloka
 
 import retrofit2.http.GET
 import retrofit2.http.Query
