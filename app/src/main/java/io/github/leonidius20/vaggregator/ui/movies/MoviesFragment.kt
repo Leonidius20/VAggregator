@@ -63,6 +63,11 @@ class MoviesFragment : Fragment(), MaterialSearchBar.OnSearchActionListener {
     }
 
     override fun onSearchConfirmed(text: CharSequence?) {
+        // hide ime
+        // check internet
+        // show loader if internet connected
+        // show errors if they happen
+        if (text.isNullOrBlank()) return
         moviesViewModel.loadMovies(text.toString())
     }
 

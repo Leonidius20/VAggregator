@@ -8,6 +8,8 @@ abstract class PieceOfContent {
 
     abstract val thumbnailUrl: String?
 
+    abstract val bigThumbnailUrl: String?
+
     abstract val provider: String
 
     abstract val link: String

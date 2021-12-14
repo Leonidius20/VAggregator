@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.squareup.picasso.Picasso
 import io.github.leonidius20.vaggregator.databinding.FragmentMovieDetailsBinding
 
 class MovieDetailsFragment: Fragment() {
@@ -33,6 +34,11 @@ class MovieDetailsFragment: Fragment() {
                     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(movie.link))
                     startActivity(intent)
                 }
+
+                if (movie.bigThumbnailUrl != null) {
+                    Picasso.get().load(movie.bigThumbnailUrl).fit().centerInside().into(movieDetailsThumbnail)
+                }
+
             }
         }
 

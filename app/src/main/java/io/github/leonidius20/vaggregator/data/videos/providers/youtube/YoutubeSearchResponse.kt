@@ -30,6 +30,8 @@ data class YoutubeResultSnippet (
 data class YoutubeThumbnails(
 
     val default: YoutubeThumbnail,
+    // there is also "medium"
+    val high: YoutubeThumbnail,
 
     )
 

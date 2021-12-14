@@ -24,4 +24,7 @@ data class Movie(
     override val thumbnailUrl: String?
         get() = null
 
+    override val bigThumbnailUrl: String?
+        get() = null
+
 }

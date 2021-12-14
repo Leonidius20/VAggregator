@@ -17,7 +17,7 @@ class VideosRepository {
                     val link = "https://www.youtube.com/watch?v=${it.id.videoId}"
                     with(it.snippet) {
                         Video(title, publishedAt, description, channelTitle, "YouTube",
-                            link, thumbnails.default.url)
+                            link, thumbnails.default.url, thumbnails.high.url)
                 }
             }
 
@@ -28,7 +28,7 @@ class VideosRepository {
             val dailymotionVids = dailymotionProvider.findVideos(q, category.dailymotionCategory).list.map {
                 Video(it.name,
                     // TODO: fix date
-                    it.date.toString(), it.description, it.uploadedBy, "Dailymotion", it.url, it.thumbnailUrl)
+                    it.date.toString(), it.description, it.uploadedBy, "Dailymotion", it.url, it.thumbnailUrl, it.thumbnailUrl)
             }
             videos.addAll(dailymotionVids)
         }

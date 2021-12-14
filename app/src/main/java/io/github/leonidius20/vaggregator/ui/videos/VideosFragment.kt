@@ -1,18 +1,25 @@
 package io.github.leonidius20.vaggregator.ui.videos
 
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.mancj.materialsearchbar.MaterialSearchBar
 import io.github.leonidius20.vaggregator.R
+import io.github.leonidius20.vaggregator.data.Status
 import io.github.leonidius20.vaggregator.data.videos.VideoCategory
 import io.github.leonidius20.vaggregator.databinding.FragmentVideosBinding
 import io.github.leonidius20.vaggregator.ui.movie_details.MovieDetailsViewModel
@@ -44,12 +51,37 @@ class VideosFragment : Fragment(), MaterialSearchBar.OnSearchActionListener, Ada
         binding.videosCategorySelector.adapter = ArrayAdapter(context!!, android.R.layout.simple_spinner_item, VideoCategory.values())
         binding.videosCategorySelector.onItemSelectedListener = this
 
+        if (!isNetworkConnected()) {
+            Snackbar.make(activity!!.window.decorView, R.string.no_internet, Snackbar.LENGTH_LONG).show()
+            // Toast.makeText(context, "No internet", Toast.LENGTH_SHORT).show()
+        }
+
         videosViewModel.videos.observe(viewLifecycleOwner) {
-            binding.searchResultsRecyclerView.adapter =
-                SearchResultsAdapter(it.toTypedArray()) { video ->
-                    contentDetailsViewModel.select(video)
-                    findNavController().navigate(VideosFragmentDirections.actionVideosListToDetails())
+            when (it.status) {
+                Status.SUCCESS -> {
+                    binding.searchResultsRecyclerView.apply {
+                        visibility = View.VISIBLE
+                        adapter =
+                            SearchResultsAdapter(it.data!!.toTypedArray()) { video ->
+                                contentDetailsViewModel.select(video)
+                                findNavController().navigate(VideosFragmentDirections.actionVideosListToDetails())
+                            }
+                    }
+                    binding.videosProgress.visibility = View.GONE
                 }
+                Status.ERROR -> {
+                    // TODO: fancier look
+                    binding.videosProgress.visibility = View.GONE
+                    binding.searchResultsRecyclerView.visibility = View.GONE
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                }
+                else -> {
+                    binding.videosProgress.visibility = View.VISIBLE
+                    binding.searchResultsRecyclerView.visibility = View.GONE
+                }
+            }
+
+
         }
 
         return root
@@ -65,7 +97,13 @@ class VideosFragment : Fragment(), MaterialSearchBar.OnSearchActionListener, Ada
     }
 
     override fun onSearchConfirmed(text: CharSequence?) {
-        videosViewModel.loadVideos(text.toString(), videosViewModel.selectedCategory)
+        if (text.isNullOrBlank()) return
+        hideKeyboard()
+        if (!isNetworkConnected()) {
+            Snackbar.make(activity!!.window.decorView, R.string.no_internet, Snackbar.LENGTH_LONG).show()
+        } else {
+            videosViewModel.loadVideos(text.toString(), videosViewModel.selectedCategory)
+        }
     }
 
     override fun onButtonClicked(buttonCode: Int) {
@@ -79,4 +117,13 @@ class VideosFragment : Fragment(), MaterialSearchBar.OnSearchActionListener, Ada
     override fun onNothingSelected(p0: AdapterView<*>?) {
 
     }
+
+    private fun hideKeyboard() = ViewCompat.getWindowInsetsController(requireView())
+        ?.hide(WindowInsetsCompat.Type.ime())
+
+    private fun isNetworkConnected(): Boolean {
+        val cm = getSystemService(context!!, ConnectivityManager::class.java)
+        return cm!!.activeNetworkInfo != null && cm.activeNetworkInfo!!.isConnected
+    }
+
 }

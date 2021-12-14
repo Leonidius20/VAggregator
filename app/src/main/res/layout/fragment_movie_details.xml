@@ -4,21 +4,36 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <ImageView
+        android:id="@+id/movie_details_thumbnail"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.3"
+        app:layout_constraintWidth_percent="1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
     <TextView
         android:id="@+id/movie_details_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintHeight_min="50dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="1"/>
+        app:layout_constraintTop_toBottomOf="@id/movie_details_thumbnail"
+        app:layout_constraintWidth_percent="1" />
 
     <TextView
         android:id="@+id/movie_details_size"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textAppearance="@android:style/TextAppearance.Material.Subhead"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/movie_details_title"
         app:layout_constraintWidth_percent="1"
@@ -30,6 +45,9 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:textAppearance="@android:style/TextAppearance.Material.Subhead"
+        android:layout_marginTop="16dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/movie_details_size"
         app:layout_constraintWidth_percent="1"
@@ -41,6 +59,8 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:textAppearance="@android:style/TextAppearance.Material.Subhead"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/movie_details_date"
         app:layout_constraintWidth_percent="1"
