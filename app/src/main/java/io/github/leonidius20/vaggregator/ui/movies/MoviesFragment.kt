@@ -9,9 +9,13 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.mancj.materialsearchbar.MaterialSearchBar
 import io.github.leonidius20.vaggregator.R
+import io.github.leonidius20.vaggregator.data.Status
 import io.github.leonidius20.vaggregator.databinding.FragmentMoviesBinding
+import io.github.leonidius20.vaggregator.ui.hideKeyboard
+import io.github.leonidius20.vaggregator.ui.isNetworkConnected
 import io.github.leonidius20.vaggregator.ui.movie_details.MovieDetailsViewModel
 import io.github.leonidius20.vaggregator.ui.movies.search_results_list.SearchResultsAdapter
 
@@ -35,17 +39,35 @@ class MoviesFragment : Fragment(), MaterialSearchBar.OnSearchActionListener {
         _binding = FragmentMoviesBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        binding.searchResultsRecyclerView.apply {
+        binding.moviesSearchResultsRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
         }
 
         moviesViewModel.movies.observe(viewLifecycleOwner) {
-            binding.searchResultsRecyclerView.adapter =
-                SearchResultsAdapter(it.toTypedArray()) { selectedMovie ->
-                    selectedMovieViewModel.select(selectedMovie)
-                    val action = MoviesFragmentDirections.actionMoviesToMovieDetails()
-                    findNavController().navigate(action)
+            when (it.status) {
+                Status.SUCCESS -> {
+                    binding.moviesSearchResultsRecyclerView.apply {
+                        visibility = View.VISIBLE
+                        adapter =
+                            SearchResultsAdapter(it.data!!.toTypedArray()) { selectedMovie ->
+                                selectedMovieViewModel.select(selectedMovie)
+                                val action = MoviesFragmentDirections.actionMoviesToMovieDetails()
+                                findNavController().navigate(action)
+                            }
+                    }
+                    binding.moviesProgress.visibility = View.GONE
+
                 }
+                Status.ERROR -> {
+                    binding.moviesProgress.visibility = View.GONE
+                    binding.moviesSearchResultsRecyclerView.visibility = View.GONE
+                    Snackbar.make(activity!!.window.decorView,  it.message.toString(), Snackbar.LENGTH_LONG).show()
+                }
+                else -> {
+                    binding.moviesProgress.visibility = View.VISIBLE
+                    binding.moviesSearchResultsRecyclerView.visibility = View.GONE
+                }
+            }
         }
 
         binding.moviesSearchBar.setOnSearchActionListener(this)
@@ -63,12 +85,13 @@ class MoviesFragment : Fragment(), MaterialSearchBar.OnSearchActionListener {
     }
 
     override fun onSearchConfirmed(text: CharSequence?) {
-        // hide ime
-        // check internet
-        // show loader if internet connected
-        // show errors if they happen
         if (text.isNullOrBlank()) return
-        moviesViewModel.loadMovies(text.toString())
+        hideKeyboard()
+        if (!isNetworkConnected()) {
+            Snackbar.make(activity!!.window.decorView, R.string.no_internet, Snackbar.LENGTH_LONG).show()
+        } else {
+            moviesViewModel.loadMovies(text.toString())
+        }
     }
 
     override fun onButtonClicked(buttonCode: Int) {

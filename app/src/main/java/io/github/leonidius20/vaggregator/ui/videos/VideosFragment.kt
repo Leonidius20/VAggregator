@@ -1,16 +1,11 @@
 package io.github.leonidius20.vaggregator.ui.videos
 
-import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -22,6 +17,8 @@ import io.github.leonidius20.vaggregator.R
 import io.github.leonidius20.vaggregator.data.Status
 import io.github.leonidius20.vaggregator.data.videos.VideoCategory
 import io.github.leonidius20.vaggregator.databinding.FragmentVideosBinding
+import io.github.leonidius20.vaggregator.ui.hideKeyboard
+import io.github.leonidius20.vaggregator.ui.isNetworkConnected
 import io.github.leonidius20.vaggregator.ui.movie_details.MovieDetailsViewModel
 import io.github.leonidius20.vaggregator.ui.movies.search_results_list.SearchResultsAdapter
 
@@ -70,10 +67,9 @@ class VideosFragment : Fragment(), MaterialSearchBar.OnSearchActionListener, Ada
                     binding.videosProgress.visibility = View.GONE
                 }
                 Status.ERROR -> {
-                    // TODO: fancier look
                     binding.videosProgress.visibility = View.GONE
                     binding.searchResultsRecyclerView.visibility = View.GONE
-                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                    Snackbar.make(activity!!.window.decorView,  it.message.toString(), Snackbar.LENGTH_LONG).show()
                 }
                 else -> {
                     binding.videosProgress.visibility = View.VISIBLE
@@ -116,14 +112,6 @@ class VideosFragment : Fragment(), MaterialSearchBar.OnSearchActionListener, Ada
 
     override fun onNothingSelected(p0: AdapterView<*>?) {
 
-    }
-
-    private fun hideKeyboard() = ViewCompat.getWindowInsetsController(requireView())
-        ?.hide(WindowInsetsCompat.Type.ime())
-
-    private fun isNetworkConnected(): Boolean {
-        val cm = getSystemService(context!!, ConnectivityManager::class.java)
-        return cm!!.activeNetworkInfo != null && cm.activeNetworkInfo!!.isConnected
     }
 
 }
