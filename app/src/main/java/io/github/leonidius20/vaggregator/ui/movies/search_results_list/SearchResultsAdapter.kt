@@ -36,6 +36,8 @@ class SearchResultsAdapter(private val movies: Array<PieceOfContent>, private va
                 .fit()
                 .centerCrop()
                 .into(holder.imageView)
+        } else {
+            holder.imageView.setImageResource(R.drawable.placeholder_thumbnail)
         }
 
         holder.descriptionTextView.text = Html.fromHtml(movie.description)

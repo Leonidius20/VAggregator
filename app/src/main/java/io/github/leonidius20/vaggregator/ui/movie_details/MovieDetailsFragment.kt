@@ -37,7 +37,13 @@ class MovieDetailsFragment: Fragment() {
                 }
 
                 if (movie.bigThumbnailUrl != null) {
-                    Picasso.get().load(movie.bigThumbnailUrl).fit().centerInside().into(movieDetailsThumbnail)
+                    Picasso.get()
+                        .load(movie.bigThumbnailUrl)
+                        .placeholder(R.drawable.placeholder_thumbnail)
+                        .fit().centerInside()
+                        .into(movieDetailsThumbnail)
+                } else {
+                    movieDetailsThumbnail.setImageResource(R.drawable.placeholder_thumbnail)
                 }
 
             }
