@@ -6,4 +6,5 @@
     <string name="search_hint">Search content…</string>
     <string name="open_link">Open video link</string>
     <string name="no_internet">No internet connection</string>
+    <string name="library_no_saved_content">Library is empty</string>
 </resources>

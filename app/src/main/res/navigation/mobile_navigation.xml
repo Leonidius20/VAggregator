@@ -29,7 +29,11 @@
             android:id="@+id/navigation_library"
             android:name="io.github.leonidius20.vaggregator.ui.library.LibraryFragment"
 
-            tools:layout="@layout/fragment_library"/>
+            tools:layout="@layout/fragment_library">
+        <action
+            android:id="@+id/action_library_to_content_details"
+            app:destination="@id/navigation_movie_details" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_movie_details"
         android:name="io.github.leonidius20.vaggregator.ui.movie_details.MovieDetailsFragment"
