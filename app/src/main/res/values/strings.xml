@@ -7,4 +7,6 @@
     <string name="open_link">Open video link</string>
     <string name="no_internet">No internet connection</string>
     <string name="library_no_saved_content">Library is empty</string>
+    <string name="repository_could_not_load_from">Couldn\'t load from %1$s</string>
+    <string name="search_no_results">No results found</string>
 </resources>

@@ -14,11 +14,14 @@ class MoviesViewModel : ViewModel() {
 
     val movies = MutableLiveData<Resource<List<Movie>>>()
 
+    val errorShown = MutableLiveData(false) // temp code to not re-show error messages
+
     fun loadMovies(q: String) {
         movies.value = Resource.loading(null)
+        errorShown.value = false
         viewModelScope.launch {
             try {
-                movies.value = Resource.success(repository.findMoves(q))
+                movies.value = repository.findMoves(q)
             } catch (e: Exception) {
                 movies.value = Resource.error(e.message!!, null)
             }

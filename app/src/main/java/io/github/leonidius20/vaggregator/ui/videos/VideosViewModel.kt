@@ -15,16 +15,18 @@ class VideosViewModel : ViewModel() {
 
     val videos = MutableLiveData<Resource<List<Video>>>()
 
+    val errorShown = MutableLiveData(false) // temp code to not re-show error messages
+
     var selectedCategory = VideoCategory.PETS_AND_ANIMALS
 
     fun loadVideos(q: String, category: VideoCategory) {
         videos.value = Resource.loading(null)
+        errorShown.value = false
         viewModelScope.launch {
             try {
-                videos.value = Resource.success(repository.findVideos(
-                    q, category))
+                videos.value = repository.findVideos(q, category)
             } catch (e: Exception) {
-                Resource.error(e.message!!, null)
+                videos.value = Resource.error(e.message!!, null)
             }
 
         }

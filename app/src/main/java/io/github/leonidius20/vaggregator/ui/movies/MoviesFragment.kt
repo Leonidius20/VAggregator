@@ -46,25 +46,36 @@ class MoviesFragment : Fragment(), MaterialSearchBar.OnSearchActionListener {
         moviesViewModel.movies.observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.SUCCESS -> {
+                    binding.moviesProgress.visibility = View.GONE
+
                     binding.moviesSearchResultsRecyclerView.apply {
                         visibility = View.VISIBLE
                         adapter =
                             SearchResultsAdapter(it.data!!.toTypedArray()) { selectedMovie ->
                                 selectedMovieViewModel.select(selectedMovie)
-                                val action = MoviesFragmentDirections.actionMoviesToMovieDetails()
+                                val action = MoviesFragmentDirections
+                                    .actionMoviesToMovieDetails()
                                 findNavController().navigate(action)
                             }
                     }
-                    binding.moviesProgress.visibility = View.GONE
 
+                    if (it.message != null && !moviesViewModel.errorShown.value!!) {
+                        Snackbar.make(activity!!.window.decorView,
+                            it.message.toString(), Snackbar.LENGTH_LONG).show()
+                        moviesViewModel.errorShown.value = true
+                    }
+
+                    binding.moviesSearchNoResults.visibility = if (it.data!!.isEmpty()) View.VISIBLE else View.GONE
                 }
                 Status.ERROR -> {
                     binding.moviesProgress.visibility = View.GONE
+                    binding.moviesSearchNoResults.visibility = View.GONE
                     binding.moviesSearchResultsRecyclerView.visibility = View.GONE
                     Snackbar.make(activity!!.window.decorView,  it.message.toString(), Snackbar.LENGTH_LONG).show()
                 }
                 else -> {
                     binding.moviesProgress.visibility = View.VISIBLE
+                    binding.moviesSearchNoResults.visibility = View.GONE
                     binding.moviesSearchResultsRecyclerView.visibility = View.GONE
                 }
             }

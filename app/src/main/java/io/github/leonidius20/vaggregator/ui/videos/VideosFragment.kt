@@ -49,8 +49,8 @@ class VideosFragment : Fragment(), MaterialSearchBar.OnSearchActionListener, Ada
         binding.videosCategorySelector.onItemSelectedListener = this
 
         if (!isNetworkConnected()) {
-            Snackbar.make(activity!!.window.decorView, R.string.no_internet, Snackbar.LENGTH_LONG).show()
-            // Toast.makeText(context, "No internet", Toast.LENGTH_SHORT).show()
+            Snackbar.make(activity!!.window.decorView,
+                R.string.no_internet, Snackbar.LENGTH_LONG).show()
         }
 
         videosViewModel.videos.observe(viewLifecycleOwner) {
@@ -61,18 +61,31 @@ class VideosFragment : Fragment(), MaterialSearchBar.OnSearchActionListener, Ada
                         adapter =
                             SearchResultsAdapter(it.data!!.toTypedArray()) { video ->
                                 contentDetailsViewModel.select(video)
-                                findNavController().navigate(VideosFragmentDirections.actionVideosListToDetails())
+                                findNavController().navigate(
+                                    VideosFragmentDirections.actionVideosListToDetails())
                             }
                     }
+
                     binding.videosProgress.visibility = View.GONE
+
+                    if (it.message != null && !videosViewModel.errorShown.value!!) {
+                        Snackbar.make(activity!!.window.decorView,
+                            it.message.toString(), Snackbar.LENGTH_LONG).show()
+                        videosViewModel.errorShown.value = true
+                    }
+
+                    binding.videosSearchNoResults.visibility = if (it.data!!.isEmpty()) View.VISIBLE else View.GONE
                 }
                 Status.ERROR -> {
                     binding.videosProgress.visibility = View.GONE
+                    binding.videosSearchNoResults.visibility = View.GONE
                     binding.searchResultsRecyclerView.visibility = View.GONE
-                    Snackbar.make(activity!!.window.decorView,  it.message.toString(), Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(activity!!.window.decorView,
+                        it.message.toString(), Snackbar.LENGTH_LONG).show()
                 }
                 else -> {
                     binding.videosProgress.visibility = View.VISIBLE
+                    binding.videosSearchNoResults.visibility = View.GONE
                     binding.searchResultsRecyclerView.visibility = View.GONE
                 }
             }
