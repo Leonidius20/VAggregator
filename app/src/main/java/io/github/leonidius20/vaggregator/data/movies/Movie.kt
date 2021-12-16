@@ -16,7 +16,7 @@ data class Movie(
 
     override val provider: String,
 
-): PieceOfContent() {
+): PieceOfContent(0, name, "Size: ${sizeString}", null, null, provider, link) {
 
     override val description: String
         get() = "Size: ${sizeString}"

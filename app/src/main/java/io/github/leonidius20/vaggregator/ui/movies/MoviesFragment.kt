@@ -16,14 +16,14 @@ import io.github.leonidius20.vaggregator.data.Status
 import io.github.leonidius20.vaggregator.databinding.FragmentMoviesBinding
 import io.github.leonidius20.vaggregator.ui.hideKeyboard
 import io.github.leonidius20.vaggregator.ui.isNetworkConnected
-import io.github.leonidius20.vaggregator.ui.movie_details.MovieDetailsViewModel
+import io.github.leonidius20.vaggregator.ui.movie_details.SelectedContentSharedViewModel
 import io.github.leonidius20.vaggregator.ui.movies.search_results_list.SearchResultsAdapter
 
 class MoviesFragment : Fragment(), MaterialSearchBar.OnSearchActionListener {
 
     private val moviesViewModel: MoviesViewModel by navGraphViewModels(R.id.mobile_navigation)
 
-    private val selectedMovieViewModel: MovieDetailsViewModel by activityViewModels()
+    private val selectedMovieViewModel: SelectedContentSharedViewModel by activityViewModels()
 
     private var _binding: FragmentMoviesBinding? = null
 

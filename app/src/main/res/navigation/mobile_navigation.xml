@@ -27,7 +27,7 @@
 
     <fragment
             android:id="@+id/navigation_library"
-            android:name="io.github.leonidius20.vaggregator.ui.library.NotificationsFragment"
+            android:name="io.github.leonidius20.vaggregator.ui.library.LibraryFragment"
 
             tools:layout="@layout/fragment_library"/>
     <fragment

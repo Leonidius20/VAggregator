@@ -11,4 +11,4 @@ data class Video(
     override val link: String,
     override val thumbnailUrl: String,
     override val bigThumbnailUrl: String?,
-): PieceOfContent()
+): PieceOfContent(0, name, description, thumbnailUrl, bigThumbnailUrl, provider, link)

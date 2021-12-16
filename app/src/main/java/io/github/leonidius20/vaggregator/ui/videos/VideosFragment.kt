@@ -19,7 +19,7 @@ import io.github.leonidius20.vaggregator.data.videos.VideoCategory
 import io.github.leonidius20.vaggregator.databinding.FragmentVideosBinding
 import io.github.leonidius20.vaggregator.ui.hideKeyboard
 import io.github.leonidius20.vaggregator.ui.isNetworkConnected
-import io.github.leonidius20.vaggregator.ui.movie_details.MovieDetailsViewModel
+import io.github.leonidius20.vaggregator.ui.movie_details.SelectedContentSharedViewModel
 import io.github.leonidius20.vaggregator.ui.movies.search_results_list.SearchResultsAdapter
 
 class VideosFragment : Fragment(), MaterialSearchBar.OnSearchActionListener, AdapterView.OnItemSelectedListener {
@@ -27,7 +27,7 @@ class VideosFragment : Fragment(), MaterialSearchBar.OnSearchActionListener, Ada
     private val videosViewModel: VideosViewModel by navGraphViewModels(R.id.mobile_navigation)
     private var _binding: FragmentVideosBinding? = null
 
-    private val contentDetailsViewModel: MovieDetailsViewModel by activityViewModels()
+    private val contentDetailsViewModel: SelectedContentSharedViewModel by activityViewModels()
 
     // This property is only valid between onCreateView and
     // onDestroyView.

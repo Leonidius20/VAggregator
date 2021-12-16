@@ -1,19 +1,22 @@
 package io.github.leonidius20.vaggregator.data
 
-abstract class PieceOfContent {
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-    abstract val name: String
+@Entity
+open class PieceOfContent(
+    @PrimaryKey(autoGenerate = true)
+    var id: Int = 0,
 
-    abstract val description: String
+    open val name: String,
 
-    abstract val thumbnailUrl: String?
+    open val description: String,
 
-    abstract val bigThumbnailUrl: String?
+    open val thumbnailUrl: String?,
 
-    abstract val provider: String
+    open val bigThumbnailUrl: String?,
 
-    abstract val link: String
+    open val provider: String,
 
-}
-
-
+    open val link: String,
+)

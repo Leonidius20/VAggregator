@@ -10,11 +10,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.squareup.picasso.Picasso
+import io.github.leonidius20.vaggregator.R
 import io.github.leonidius20.vaggregator.databinding.FragmentMovieDetailsBinding
 
 class MovieDetailsFragment: Fragment() {
 
-    private val viewModel: MovieDetailsViewModel by activityViewModels()
+    private val viewModel: SelectedContentSharedViewModel by activityViewModels()
     private var _binding: FragmentMovieDetailsBinding? = null
 
     // This property is only valid between onCreateView and
@@ -39,6 +40,21 @@ class MovieDetailsFragment: Fragment() {
                     Picasso.get().load(movie.bigThumbnailUrl).fit().centerInside().into(movieDetailsThumbnail)
                 }
 
+            }
+        }
+
+        val onSaveToLibrary = { _: View -> viewModel.saveToLibrary() }
+        val onRemoveFromLibrary = { _: View -> viewModel.removeFromLibrary() }
+
+        viewModel.isContentSavedToLibrary.observe(viewLifecycleOwner) {
+            binding.movieDetailsSaveButton.apply {
+                if (it) {
+                    setImageResource(R.drawable.baseline_library_add_check_24)
+                    setOnClickListener(onRemoveFromLibrary)
+                } else {
+                    setImageResource(R.drawable.baseline_library_add_24)
+                    setOnClickListener(onSaveToLibrary)
+                }
             }
         }
 
