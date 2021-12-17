@@ -1,21 +1,16 @@
 package io.github.leonidius20.vaggregator.ui.library
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import io.github.leonidius20.vaggregator.data.PieceOfContent
+import io.github.leonidius20.vaggregator.data.Resource
 import io.github.leonidius20.vaggregator.data.library.LibraryRepository
-import kotlinx.coroutines.launch
+import io.github.leonidius20.vaggregator.ui.base.BaseListViewModel
 
-class LibraryViewModel : ViewModel() {
+class LibraryViewModel : BaseListViewModel() {
 
     private val repository = LibraryRepository.instance
 
-    val data = MutableLiveData<List<PieceOfContent>>()
-
-    fun loadData() {
-        viewModelScope.launch {
-            data.value = repository.getAll()
-        }
+    override suspend fun obtainData(): Resource<List<PieceOfContent>> {
+        return Resource.success(repository.getAll())
     }
+
 }
