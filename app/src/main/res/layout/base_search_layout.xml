@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.mancj.materialsearchbar.MaterialSearchBar
+        style="@style/MaterialSearchBarLight"
+        app:mt_speechMode="false"
+        app:mt_hint="@string/search_hint"
+        app:mt_maxSuggestionsCount="10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/search_bar"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@android:drawable/dialog_holo_light_frame"
+        />
+
+
+</merge>

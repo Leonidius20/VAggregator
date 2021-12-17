@@ -1,4 +1,4 @@
-package io.github.leonidius20.vaggregator.ui.movies.search_results_list
+package io.github.leonidius20.vaggregator.ui.base.list
 
 import android.text.Html
 import android.view.LayoutInflater

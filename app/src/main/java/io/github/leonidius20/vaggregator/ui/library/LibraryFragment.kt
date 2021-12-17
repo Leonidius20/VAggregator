@@ -8,7 +8,7 @@ import androidx.navigation.NavDirections
 import androidx.navigation.navGraphViewModels
 import io.github.leonidius20.vaggregator.R
 import io.github.leonidius20.vaggregator.databinding.FragmentLibraryBinding
-import io.github.leonidius20.vaggregator.ui.base.BaseListFragment
+import io.github.leonidius20.vaggregator.ui.base.list.BaseListFragment
 
 class LibraryFragment : BaseListFragment<LibraryViewModel>() {
 

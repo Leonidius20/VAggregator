@@ -1,4 +1,4 @@
-package io.github.leonidius20.vaggregator.ui.base
+package io.github.leonidius20.vaggregator.ui.base.list
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,7 +13,6 @@ import com.google.android.material.snackbar.Snackbar
 import io.github.leonidius20.vaggregator.data.Status
 import io.github.leonidius20.vaggregator.databinding.BaseListBinding
 import io.github.leonidius20.vaggregator.ui.movie_details.SelectedContentSharedViewModel
-import io.github.leonidius20.vaggregator.ui.movies.search_results_list.SearchResultsAdapter
 
 abstract class BaseListFragment<VM: BaseListViewModel>: Fragment() {
 

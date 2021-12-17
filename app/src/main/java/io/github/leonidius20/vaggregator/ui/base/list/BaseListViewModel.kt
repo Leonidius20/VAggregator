@@ -1,4 +1,4 @@
-package io.github.leonidius20.vaggregator.ui.base
+package io.github.leonidius20.vaggregator.ui.base.list
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

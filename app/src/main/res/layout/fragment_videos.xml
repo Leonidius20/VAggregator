@@ -7,59 +7,15 @@
         android:layout_height="match_parent"
         tools:context=".ui.videos.VideosFragment">
 
-    <com.mancj.materialsearchbar.MaterialSearchBar
-        style="@style/MaterialSearchBarLight"
-        app:mt_speechMode="false"
-        app:mt_hint="@string/search_hint"
-        app:mt_maxSuggestionsCount="10"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/videos_search_bar"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@android:drawable/dialog_holo_light_frame"
-        />
-
-    <ProgressBar
-        android:id="@+id/videos_progress"
-        android:layout_width="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        />
+    <include layout="@layout/base_search_layout"/>
 
     <Spinner
         android:id="@+id/videos_category_selector"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/videos_search_bar" />
+        app:layout_constraintTop_toBottomOf="@id/search_bar"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/search_results_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/videos_category_selector">
+    <include layout="@layout/base_list"/>
 
-    </androidx.recyclerview.widget.RecyclerView>
-
-    <TextView
-        android:id="@+id/videos_search_no_results"
-        android:text="@string/search_no_results"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

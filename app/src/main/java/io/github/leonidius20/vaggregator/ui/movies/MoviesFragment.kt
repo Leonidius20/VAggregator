@@ -14,10 +14,10 @@ import com.mancj.materialsearchbar.MaterialSearchBar
 import io.github.leonidius20.vaggregator.R
 import io.github.leonidius20.vaggregator.data.Status
 import io.github.leonidius20.vaggregator.databinding.FragmentMoviesBinding
+import io.github.leonidius20.vaggregator.ui.base.list.SearchResultsAdapter
 import io.github.leonidius20.vaggregator.ui.hideKeyboard
 import io.github.leonidius20.vaggregator.ui.isNetworkConnected
 import io.github.leonidius20.vaggregator.ui.movie_details.SelectedContentSharedViewModel
-import io.github.leonidius20.vaggregator.ui.movies.search_results_list.SearchResultsAdapter
 
 class MoviesFragment : Fragment(), MaterialSearchBar.OnSearchActionListener {
 
