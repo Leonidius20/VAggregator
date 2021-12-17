@@ -44,6 +44,4 @@ data class ThePirateBayMovie(
             "ounce&tr=udp%3A%2F%2Ftracker.pirateparty.gr%3A6969%2Fannounce&tr=udp%3A" +
             "%2F%2Ftracker.cyberia.is%3A6969%2Fannounce"
 
-    val sizeString: String get() =  "%.2f MB".format(size / 1048576F)
-
 }
