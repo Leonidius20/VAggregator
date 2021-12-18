@@ -33,10 +33,6 @@ enum class VideoCategory(
 
     override fun toString() = titleString
 
-
-
-
-
     // https://gist.github.com/dgp/1b24bf2961521bd75d6c
     // https://developer.dailymotion.com/api/#channel
 
